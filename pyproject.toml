@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "hvb-sohbe-falcon-error-gen5"
+version = "1.0.7"
+description = "Special version of Falcon for SOHBE: It simulates the Falcon SOH for the given input data and signals and calculates the Falcon error based on the simulated Falcon SOH and the given SOHBE SOH."
+authors = ["Budurova Oksana <oksana.budurova@capgemini.com>", "Thomas Pfeiffer <thomas.tp.pfeiffer@partner.bmwgroup.com>", "Laurent Lindpointner <laurent.lindpointner@partner.bmwgroup.com>"]
+readme = "README.md"
+packages = [{include = "*", from="src"}]
+
+[tool.poetry.dependencies]
+python = "~3.11.6"
+pydantic = "^2.7.0"
+falcon = "==3.0.3"
+pyacor = "==3.0.1"
+Werkzeugkoffer = "==1.0.7"
+
+#TODO replace local BMW libs with versions on Artifactory, once they are available on Artifactory  
+[tool.poetry.group.dev.dependencies]
+falcon = {file = "./lib/falcon-3.0.3-py3-none-any.whl"}
+pyacor = {file = "./lib/pyacor-3.0.1-py3-none-any.whl"}
+Werkzeugkoffer = {file = "./lib/Werkzeugkoffer-1.0.7-py3-none-any.whl"}
+
+[tool.poetry.dev-dependencies]
+bandit = "^1.8.2"
+mypy = "^1.10.1"
+numpy = "^1.21.0"
+pandas-stubs = "^2.2.3.241009"
+pytest = "^8.2.2"
+pytest-cov = "^5.0.0"
+pytest-xdist = "^3.6.1"
+ruff = "^0.4.10"
+sphinx = "8.0.2"
+sphinx-autoapi = "3.2.1"
+sphinx-pyproject = "0.3.0"
+sphinxcontrib-confluencebuilder = "2.6.1"
+
+[[tool.poetry.source]]
+name = "hv-battery-pypi-virtual"
+url = "https://packages.orbit.bmwgroup.net/artifactory/api/pypi/hv-battery-pypi-virtual/simple"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "hv-battery-pypi-local"
+url = "https://packages.orbit.bmwgroup.net/artifactory/api/pypi/hv-battery-pypi-local/"
+priority = "explicit"
+
+[tool.bandit]
+exclude_dirs = [".venv", "dist"]
+
+[tool.bandit.assert_used]
+skips = ['*_test.py', '*test_*.py']
+
+[tool.mypy]
+python_version = 3.11
+
+[tool.ruff]
+target-version = "py311"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
