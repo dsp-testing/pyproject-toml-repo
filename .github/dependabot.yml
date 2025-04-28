@@ -1,0 +1,31 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    labels:
+      - patch
+      - dependabot
+    schedule:
+      interval: "daily"
+      time: "06:00"
+    open-pull-requests-limit: 20
+    groups:
+      minor-updates:
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: werkzeugkoffer
+      - dependency-name: falcon
+      - dependency-name: pyacor
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels:
+      - patch
+      - dependabot
+    schedule:
+      interval: "daily"
+      time: "08:00"
+    open-pull-requests-limit: 20
+    ignore:
+      - dependency-name: 'HVSSIM/hvb-devops-shared-infrastructure'
